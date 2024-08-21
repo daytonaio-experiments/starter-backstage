@@ -2,6 +2,9 @@
 
 This repository contains a Backstage application set up within a Dev Container environment. Backstage is an open-source platform for building developer portals, allowing you to centralize your infrastructure tooling, services, and documentation. The project is configured with Dev Container to streamline development, making it easier to set up, develop, and maintain.
 
+![backstage-starter-daytona-2](https://github.com/user-attachments/assets/576c1746-e71a-4b05-9ecc-425536d561df)
+
+
 ## Features
 
 - **Developer Portal**: Centralized platform to manage services, documentation, and tooling.
@@ -129,7 +132,7 @@ The project includes a devcontainer configuration for seamless development in a 
       ]
     }
   },
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceFolder": "/workspaces/starter-backstage",
   "forwardPorts": [
     3000,
     7007
@@ -148,6 +151,22 @@ The project includes a devcontainer configuration for seamless development in a 
   "remoteUser": "daytona"
 }
 ```
+This configuration includes:
+
+- **name**: Specifies the name of the development environment.
+- **image**: Uses the `ubuntu:22.04` Docker image as the base for the development environment.
+- **features**: 
+  - **common-utils**: Adds common utilities (e.g., Zsh) with configurations for the user "daytona" (UID: 1000, GID: 1000) and sets Zsh as the default shell.
+  - **node**: Installs Node.js version 20 with dependencies for `node-gyp` and manages Node versions using NVM 0.40.0.
+  - **typescript**: Adds TypeScript support for the development environment.
+  - **git**: Installs Git to manage source code versioning.
+- **overrideFeatureInstallOrder**: Specifies the order of feature installation to ensure common utilities, Git, Node.js, and TypeScript are set up in the correct sequence.
+- **customizations**: Installs essential Visual Studio Code extensions, including Prettier, ESLint, a spell checker, and TypeScript Next.
+- **workspaceFolder**: Sets the workspace folder to `/workspaces/starter-backstage` to match the local workspace folder name.
+- **forwardPorts**: Sets up port forwarding for the frontend (3000) and backend (7007) servers.
+- **portsAttributes**: Labels the forwarded ports with "Frontend" for 3000 and "Backend" for 7007.
+- **onCreateCommand**: Runs `yarn install` to install project dependencies automatically when the container is created.
+- **remoteUser**: Sets "daytona" as the remote user for running commands within the container.
 
 ## Why Daytona?
 
