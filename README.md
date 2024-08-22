@@ -132,7 +132,7 @@ The project includes a devcontainer configuration for seamless development in a 
       ]
     }
   },
-  "workspaceFolder": "/workspaces/starter-backstage",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "forwardPorts": [
     3000,
     7007
@@ -162,7 +162,7 @@ This configuration includes:
   - **git**: Installs Git to manage source code versioning.
 - **overrideFeatureInstallOrder**: Specifies the order of feature installation to ensure common utilities, Git, Node.js, and TypeScript are set up in the correct sequence.
 - **customizations**: Installs essential Visual Studio Code extensions, including Prettier, ESLint, a spell checker, and TypeScript Next.
-- **workspaceFolder**: Sets the workspace folder to `/workspaces/starter-backstage` to match the local workspace folder name.
+- **workspaceFolder**: Sets the workspace folder to `/workspaces/${localWorkspaceFolderBasename}` to match the local workspace folder name.
 - **forwardPorts**: Sets up port forwarding for the frontend (3000) and backend (7007) servers.
 - **portsAttributes**: Labels the forwarded ports with "Frontend" for 3000 and "Backend" for 7007.
 - **onCreateCommand**: Runs `yarn install` to install project dependencies automatically when the container is created.
