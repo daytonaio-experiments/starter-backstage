@@ -50,7 +50,7 @@
   "containerEnv": {
     "HOST": "0.0.0.0"
   },
-  "workspaceFolder": "/workspaces/daytona-backstage-starter",
+  "workspaceFolder": "/workspaces/starter-backstage",
   "postCreateCommand": "yarn install",
   "remoteUser": "daytona"
 }
