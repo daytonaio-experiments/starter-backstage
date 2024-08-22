@@ -102,7 +102,7 @@ catalog:
     githubOrg:
       id: github
       githubUrl: https://github.com
-      orgs: ['kainth-inc']
+      orgs: 
       schedule:
         initialDelay: { seconds: 30 }
         frequency: { hours: 1 }
