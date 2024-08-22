@@ -49,6 +49,17 @@ GitHub will provide you with a `Client ID` and `Client Secret`. Add these to you
 export GITHUB_CLIENT_ID=<ClientId>
 export GITHUB_CLIENT_SECRET=<ClientSecret>
 ```
+Next, configure your GitHub organization in the app-config.yaml file to enable catalog ingestion:
+
+```yaml
+
+catalog:
+  providers:
+    githubOrg:
+      id: github
+      githubUrl: https://github.com
+      orgs: ['<Your_Organization_Name>']
+```
 
 2. **Enabling GitHub Integrations:**
 
@@ -67,7 +78,7 @@ daytona serve
 ```
 4. **Create Daytona Workspace:**
 ```bash
-daytona create https://github.com/daytonaio-experiments/starter-backstage.git
+daytona create https://github.com/daytonaio-experiments/starter-backstage.git -t local
 ```
 
 5. **Select Preferred IDE:**
