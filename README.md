@@ -26,7 +26,29 @@ This repository contains a Backstage application set up within a Dev Container e
 
 ### Steps to Set Up Workspace for Backstage
 
-1. **Setting Up SSO for Backstage:**
+1. **Start Daytona Server:**
+* Open your terminal and start Daytona server using following command:
+```bash
+daytona serve
+```
+2. **Create Daytona Workspace:**
+```bash
+daytona create https://github.com/daytonaio-experiments/starter-backstage.git -t local
+```
+
+3. **Select Preferred IDE:**
+   
+```bash
+daytona ide
+```
+
+4. **Open the Workspace:**
+   
+```bash
+daytona code
+```
+
+5. **Setting Up SSO for Backstage:**
 
 To enable Single Sign-On (SSO) for your Backstage application, you need administrative access to your GitHub organization. If you don't have an organization, you can create one by navigating to [GitHub Organizations](https://github.com/account/organizations).
 
@@ -61,7 +83,7 @@ catalog:
       orgs: ['<Your_Organization_Name>']
 ```
 
-2. **Enabling GitHub Integrations:**
+6. **Enabling GitHub Integrations:**
 
 Now that we are allowing users to sign in to Backstage, we should allow them to create some software and register entities in GitHub. This can be done through personal access token.
 
@@ -70,27 +92,6 @@ Now that we are allowing users to sign in to Backstage, we should allow them to 
 * Update your `.env` file with the generated token.
 ```bash
 export GITHUB_TOKEN=<PAT_TOKEN>
-```
-3. **Start Daytona Server:**
-* Open your terminal and start Daytona server using following command:
-```bash
-daytona serve
-```
-4. **Create Daytona Workspace:**
-```bash
-daytona create https://github.com/daytonaio-experiments/starter-backstage.git -t local
-```
-
-5. **Select Preferred IDE:**
-   
-```bash
-daytona ide
-```
-
-6. **Open the Workspace:**
-   
-```bash
-daytona code
 ```
 7. **Install Dependencies:**
 * After workspace gets opened install dependencies using:
