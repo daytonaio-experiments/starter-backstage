@@ -93,6 +93,7 @@ Now that we are allowing users to sign in to Backstage, we should allow them to 
 ```bash
 export GITHUB_TOKEN=<PAT_TOKEN>
 ```
+
 7. **Install Dependencies:**
 * After workspace gets opened install dependencies using:
 ```bash
