@@ -1,10 +1,18 @@
 # Getting Started with Backstage: A Developer’s Guide to Setup and Building Custom Plugins
 
-Backstage is an open-source platform, initially developed by Spotify and now part of CNCF, that serves as a unified developer portal. It centralizes all infrastructure tools, services, and documentation, offering a customizable environment where teams can manage projects, streamline workflows, and boost productivity. 
+Backstage—an open-source platform initially developed by Spotify and now part of CNCF—has transformed how developers manage their workflows. It centralizes all infrastructure tools, services, and documentation, offering a customizable environment where teams can manage projects, streamline workflows, and boost productivity. For more information, visit the official [Backstage website](https://backstage.io/).
 
-Built on React and Node, Backstage allows teams to define its functionality through a flexible plugin system, making it a robust framework for creating tailored end-to-end development environments.
+This guide aims to walk you through setting up Backstage and building a custom plugin to tailor the platform to your specific needs. Whether you're new to Backstage or looking to expand its capabilities, this guide will help you navigate the process with ease. 
+
+But setting up such a powerful platform can be complex. Configuration issues, dependency conflicts, and environment inconsistencies are common hurdles that can slow down your progress. 
+
+This is where [Daytona](https://www.daytona.io/) comes into play.
+
+Daytona simplifies Development Environment Management (DEM) by ensuring a consistent, repeatable, and easily deployable workspace across any platform. By using Daytona in this guide, you'll experience a smoother Backstage setup, allowing you to concentrate on what truly matters—building and shipping great applications.
 
 ## Features Backstage Provides to Developers
+
+Backstage isn’t just a developer portal—it’s a powerful platform that centralizes and simplifies managing your organization’s services and tools. Here are some key features that make it indispensable for development teams.
 
 ### Software Catalog:
 
@@ -49,21 +57,9 @@ For detailed instructions on getting Daytona installed and configured, visit the
 ```bash
 daytona serve
 ```
-2. **Create Daytona Workspace:**
+2. **Create and Open in Daytona Workspace:**
 ```bash
-daytona create https://github.com/daytonaio-experiments/starter-backstage.git -t local
-```
-
-3. **Select Preferred IDE:**
-   
-```bash
-daytona ide
-```
-
-4. **Open the Workspace:**
-   
-```bash
-daytona code
+daytona create https://github.com/daytonaio-experiments/starter-backstage.git --code
 ```
 
 After following these commands, the Backstage repository will open in your preferred IDE.
@@ -88,8 +84,8 @@ To register the application, follow these steps:
 GitHub will provide you with a `Client ID` and `Client Secret`. Add these to your `.env` file:
 
 ```bash
-export GITHUB_CLIENT_ID=<ClientId>
-export GITHUB_CLIENT_SECRET=<ClientSecret>
+GITHUB_CLIENT_ID=<ClientId>
+GITHUB_CLIENT_SECRET=<ClientSecret>
 ```
 Next, configure your GitHub organization in the app-config.yaml file to enable catalog ingestion:
 
@@ -110,24 +106,21 @@ Now that we are allowing users to sign in to Backstage, we should allow them to 
 * Generate a Personal Access Token via the [GitHub token creation page](https://github.com/settings/tokens).
 * Ensure that the `repo` and `workflow` permissions are selected for scaffolding repositories.
 * Update your `.env` file with the generated token.
+
 ```bash
-export GITHUB_TOKEN=<PAT_TOKEN>
+GITHUB_TOKEN=<PAT_TOKEN>
 ```
 
 ### Running your Backstage Application
-1. **Install Dependencies:**
-* After workspace gets opened install dependencies using:
-```bash
-yarn install
-```
-2. **Run your Backstage Application:**
+
+Run your Backstage Application using command:
 ```bash
 yarn dev
 ```
 
 Your Backstage Application will now be up and running.
 
-![backstage-doc-1](https://github.com/user-attachments/assets/7982eb45-21d5-42be-8118-27c772836b53)
+![](/docs/assets/backstage-image-1.png)
 
 ## Seamless Setup: Daytona Meets Dev Container
 
@@ -298,11 +291,11 @@ spec:
 
 5. Use the `HOME > CREATE > REGISTER EXISTING COMPONENT` button to register your service component using the link to the `catalog-info.yaml` file.
    
-![backstage-doc-2](https://github.com/user-attachments/assets/8a36ca0a-f2b4-4626-a6ed-8ab754f1bb66)
+![](/docs/assets/backstage-image-2.png)
 
 6. Once registered, you can navigate to the component and use the `MY PLUGIN` tab to display your plugin’s UI.
 
-![backstage-doc-3](https://github.com/user-attachments/assets/34f04310-9566-4ef5-818e-d7fe89667d4a)
+![](/docs/assets/backstage-image-3.png)
 
 Now that you've created and integrated a custom plugin in Backstage, you’ve added a powerful tool to your developer portal. This plugin can now serve your team’s specific needs, making your workflows smoother and more efficient.
 
