@@ -82,12 +82,7 @@ Now that we are allowing users to sign in to Backstage, we should allow them to 
 GITHUB_TOKEN=<YOUR_GITHUB_TOKEN>
 ```
 
-5. **Install Dependencies:**
-* After workspace gets opened install dependencies using:
-```bash
-yarn install
-```
-6. **Run your Backstage Application:**
+5. **Run your Backstage Application:**
 ```bash
 yarn dev
 ```
