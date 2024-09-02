@@ -31,24 +31,12 @@ This repository contains a Backstage application set up within a Dev Container e
 ```bash
 daytona serve
 ```
-2. **Create Daytona Workspace:**
+2. **Create and Open in Daytona Workspace:**
 ```bash
-daytona create https://github.com/daytonaio-experiments/starter-backstage.git -t local
+daytona create https://github.com/daytonaio-experiments/starter-backstage.git --code
 ```
 
-3. **Select Preferred IDE:**
-   
-```bash
-daytona ide
-```
-
-4. **Open the Workspace:**
-   
-```bash
-daytona code
-```
-
-5. **Setting Up SSO for Backstage:**
+3. **Setting Up SSO for Backstage:**
 
 To enable Single Sign-On (SSO) for your Backstage application, you need administrative access to your GitHub organization. If you don't have an organization, you can create one by navigating to [GitHub Organizations](https://github.com/account/organizations).
 
@@ -68,8 +56,8 @@ To register the application, follow these steps:
 GitHub will provide you with a `Client ID` and `Client Secret`. Add these to your `.env` file:
 
 ```bash
-export GITHUB_CLIENT_ID=<ClientId>
-export GITHUB_CLIENT_SECRET=<ClientSecret>
+GITHUB_CLIENT_ID=<YOUR_GITHUB_CLIENT_ID>
+GITHUB_CLIENT_SECRET=<YOUR_GITHUB_CLIENT_SECRET>
 ```
 Next, configure your GitHub organization in the app-config.yaml file to enable catalog ingestion:
 
@@ -83,7 +71,7 @@ catalog:
       orgs: ['<Your_Organization_Name>']
 ```
 
-6. **Enabling GitHub Integrations:**
+4. **Enabling GitHub Integrations:**
 
 Now that we are allowing users to sign in to Backstage, we should allow them to create some software and register entities in GitHub. This can be done through personal access token.
 
@@ -91,15 +79,15 @@ Now that we are allowing users to sign in to Backstage, we should allow them to 
 * Ensure that the `repo` and `workflow` permissions are selected for scaffolding repositories.
 * Update your `.env` file with the generated token.
 ```bash
-export GITHUB_TOKEN=<PAT_TOKEN>
+GITHUB_TOKEN=<YOUR_GITHUB_TOKEN>
 ```
 
-7. **Install Dependencies:**
+5. **Install Dependencies:**
 * After workspace gets opened install dependencies using:
 ```bash
 yarn install
 ```
-8. **Run your Backstage Application:**
+6. **Run your Backstage Application:**
 ```bash
 yarn dev
 ```
@@ -115,16 +103,16 @@ The project includes a devcontainer configuration for seamless development in a 
   "name": "Backstage Dev Container",
   "image": "ubuntu:22.04",
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2.5.0": {
+    "ghcr.io/devcontainers/features/common-utils:2.4.7": {
       "username": "daytona",
       "userUid": 1000,
       "userGid": 1000,
       "configureZshAsDefaultShell": true
-    },  
+    },
     "ghcr.io/devcontainers/features/node:1": {
-      "nodeGypDependencies": true,  
-      "version": "20",
-      "nvmVersion": "0.40.0"
+      "nodeGypDependencies": true,
+      "version": "18",
+      "nvmVersion": "0.39.5"
     },
     "ghcr.io/devcontainers-contrib/features/typescript:2": {},
     "ghcr.io/devcontainers/features/git:1": {}
@@ -135,6 +123,7 @@ The project includes a devcontainer configuration for seamless development in a 
     "ghcr.io/devcontainers/features/node",
     "ghcr.io/devcontainers-contrib/features/typescript"
   ],
+  "runArgs": ["--network=host"],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -145,7 +134,6 @@ The project includes a devcontainer configuration for seamless development in a 
       ]
     }
   },
-  "workspaceFolder": "/workspaces/starter-backstage",
   "forwardPorts": [
     3000,
     7007
@@ -160,25 +148,31 @@ The project includes a devcontainer configuration for seamless development in a 
       "onAutoForward": "ignore"
     }
   },
-  "onCreateCommand": "yarn install",
+  "containerEnv": {
+    "HOST": "0.0.0.0"
+  },
+  "workspaceFolder": "/workspaces/starter-backstage",
+  "postCreateCommand": "yarn install",
   "remoteUser": "daytona"
 }
 ```
 This configuration includes:
 
-- **name**: Specifies the name of the development environment.
+- **name**: Specifies the name of the development environment as "Backstage Dev Container."
 - **image**: Uses the `ubuntu:22.04` Docker image as the base for the development environment.
 - **features**: 
-  - **common-utils**: Adds common utilities (e.g., Zsh) with configurations for the user "daytona" (UID: 1000, GID: 1000) and sets Zsh as the default shell.
-  - **node**: Installs Node.js version 20 with dependencies for `node-gyp` and manages Node versions using NVM 0.40.0.
+  - **common-utils**: Adds common utilities with configurations for the user "daytona" (UID: 1000, GID: 1000) and sets Zsh as the default shell.
+  - **node**: Installs Node.js version 18 with dependencies for `node-gyp` and manages Node versions using NVM 0.39.5.
   - **typescript**: Adds TypeScript support for the development environment.
   - **git**: Installs Git to manage source code versioning.
 - **overrideFeatureInstallOrder**: Specifies the order of feature installation to ensure common utilities, Git, Node.js, and TypeScript are set up in the correct sequence.
+- **runArgs**: Uses the `--network=host` argument to ensure the container shares the host's network, simplifying network configurations for development.
 - **customizations**: Installs essential Visual Studio Code extensions, including Prettier, ESLint, a spell checker, and TypeScript Next.
-- **workspaceFolder**: Sets the workspace folder to `/workspaces/starter-backstage` to match the local workspace folder name.
 - **forwardPorts**: Sets up port forwarding for the frontend (3000) and backend (7007) servers.
-- **portsAttributes**: Labels the forwarded ports with "Frontend" for 3000 and "Backend" for 7007.
-- **onCreateCommand**: Runs `yarn install` to install project dependencies automatically when the container is created.
+- **portsAttributes**: Labels the forwarded ports with "Frontend" for 3000 and "Backend" for 7007. The frontend port will notify on auto-forward, while the backend port will be ignored.
+- **containerEnv**: Sets the environment variable `HOST` to `0.0.0.0`, ensuring that the application is accessible on all network interfaces.
+- **workspaceFolder**: Sets the workspace folder to `/workspaces/starter-backstage` to match the local workspace folder name.
+- **postCreateCommand**: Runs `yarn install` to automatically install project dependencies when the container is created.
 - **remoteUser**: Sets "daytona" as the remote user for running commands within the container.
 
 ## Why Daytona?
