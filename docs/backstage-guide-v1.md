@@ -34,6 +34,8 @@ Backstage’s Plugin Support allows for extensive customization, with a wide ran
 
 Efficient development setups are crucial to maximizing productivity. In this guide, we'll simplify your workflow using a pre-configured repository with a Backstage starter app, ready for you to clone and build on.
 
+> For a complete codebase, including all components, configurations, and setup files discussed in this guide, check out our GitHub repository [https://github.com/daytonaio-experiments/starter-backstage](https://github.com/daytonaio-experiments/starter-backstage)
+
 To optimize the development environment, we'll also utilize Daytona to ensure a smooth and streamlined setup.
 
 Before setting up your environment for Backstage, let's ensure you have the tools and a basic understanding to follow along smoothly. Here are the prerequisites you'll need:
