@@ -1,0 +1,27 @@
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: guest
+spec:
+  memberOf: [guests]
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: guests
+spec:
+  type: team
+  children: []
+# ---
+# apiVersion: backstage.io/v1alpha1
+# kind: User
+# metadata:
+#   name: anuragkainth  # This should match your GitHub username
+# spec:
+#   profile:
+#     displayName: Anurag Kainth  # Your display name
+#     email: anuragkainth07@gmail.com  # Your email address
+#   memberOf: [guests]  # Specify the groups the user is a member of

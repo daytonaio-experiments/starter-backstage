@@ -1,0 +1,85 @@
+app:
+  title: Voltona Devloper Portal
+  baseUrl: 'http://localhost:3000'
+  listen:
+    host: 0.0.0.0
+organization:
+  name: Voltona
+
+backend:
+  baseUrl: 'http://localhost:7007'
+  listen:
+    port: 7007
+    host: 0.0.0.0
+  csp:
+    connect-src: ["'self'", 'http:', 'https:']
+  cors:
+    origin: 'http://localhost:3000'
+    methods: ['GET', 'HEAD', 'PATCH', 'POST', 'PUT', 'DELETE']
+    credentials: true
+  database:
+    client: better-sqlite3
+    connection: ':memory:'
+
+permission:
+  enabled: true
+
+integrations:
+  github:
+    - host: github.com
+      token: ${GITHUB_TOKEN}
+
+techdocs:
+  builder: 'local' 
+  generator:
+    runIn: 'docker'
+  publisher:
+    type: 'local' 
+
+auth:
+  environment: development
+  providers:
+    guest:
+      enabled: true
+      signIn: 
+        resolver:
+          type: guest
+          options:
+            name: Guest User
+            email: guest@example.com
+    github:
+      development:
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
+            - resolver: emailMatchingUserEntityProfileEmail
+            - resolver: emailLocalPartMatchingUserEntityName
+
+catalog:
+  providers:
+    githubOrg:
+      id: github
+      githubUrl: https://github.com
+      orgs: 
+      schedule:
+        initialDelay: { seconds: 30 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }
+  import:
+    entityFilename: catalog-info.yaml
+    pullRequestBranchName: backstage-integration
+  rules:
+    - allow: [Component, System, API, Resource, Location]
+  locations:
+    - type: file
+      target: ../../examples/entities.yaml
+    - type: file
+      target: ../../examples/template/template.yaml
+      rules:
+        - allow: [Template]
+    - type: file
+      target: ../../examples/org.yaml
+      rules:
+        - allow: [User, Group]
